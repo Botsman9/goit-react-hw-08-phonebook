@@ -51,7 +51,7 @@ function ContactForm() {
           type="text"
           name="name"
           value={name}
-          placeholder="Jack Sparrow"
+          placeholder="Anie Copeland"
           onChange={event => setName(event.currentTarget.value)}
           className={s.input}
         />
@@ -63,7 +63,7 @@ function ContactForm() {
           type="tel"
           name="number"
           value={number}
-          placeholder="111-11-11"
+          placeholder="227-91-26"
           onChange={event => setNumber(event.currentTarget.value)}
           className={s.input}
         />
