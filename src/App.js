@@ -1,25 +1,50 @@
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Container from './components/Container/Container';
+import PhonebookView from './views/PhonebookView';
+import HomeView from './views/HomeView';
+import LoginView from './views/LoginView';
+import RegisterView from './views/RegisterView';
+import AppBar from './components/AppBar';
+import { authOperations, authSelectors } from './redux/auth';
+import { Switch } from 'react-router-dom';
+import PrivatRoute from './components/PrivatRoute';
+import PublicRoute from './components/PublicRoute';
+
 import './App.css';
 
-function App() {
+export default function App() {
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    !isFetchingCurrentUser && (
+      <>
+        <AppBar />
+        <Container>
+          <Switch>
+            <PublicRoute exact path="/">
+              <HomeView />
+            </PublicRoute>
+
+            <PublicRoute exact path="/register" restricted>
+              <RegisterView />
+            </PublicRoute>
+
+            <PublicRoute exact path="/login" restricted>
+              <LoginView />
+            </PublicRoute>
+
+            <PrivatRoute>
+              <PhonebookView path="/contacts" />
+            </PrivatRoute>
+          </Switch>
+        </Container>
+      </>
+    )
   );
 }
-
-export default App;

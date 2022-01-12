@@ -1,5 +1,27 @@
 .App {
   text-align: center;
+  margin: 0;
+}
+
+.title {
+  font-size: 40px;
+  font-family: roboto;
+  text-align: center;
+  color: rgb(96, 105, 99);
+}
+
+.subtitle {
+  font-family: roboto;
+  text-align: center;
+  color: rgb(96, 105, 99);
+  margin-top: 40px;
+}
+
+.filter {
+  font-family: roboto;
+  text-align: center;
+  color: rgb(96, 105, 99);
+  margin-top: 40px;
 }
 
 .App-logo {
@@ -35,4 +57,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1,
+h2,
+span,
+p {
+  color: white;
 }
